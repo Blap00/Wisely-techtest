@@ -50,7 +50,9 @@ type nul > views/AboutView.vue
 type nul > router/index.js
 </code>
 
-
+<hr>
+<p>Para solucionar el tipico problema de las cors utilizaremos una herramienta de cors para solucionarla y habilitar el uso entre la api y el frontend</p>
+<p>Esta herramienta de cors la instalaremos dentro de backend</p>
 
 
 <hr>

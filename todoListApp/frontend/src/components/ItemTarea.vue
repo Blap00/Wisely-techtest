@@ -1,45 +1,28 @@
 <template>
-  <li>
-    <input type="checkbox" v-model="task.estado" @change="updateTask" />
-    <span :class="{ done: task.estado }">{{ task.titulo }}</span>
-    <button @click="deleteTask">Eliminar</button>
-  </li>
+  <div>
+    <h3>{{ task.titulo }}</h3>
+    <p>{{ task.descripcion }}</p>
+    <button @click="editTask">Edit</button>
+    <button @click="deleteTask">Delete</button>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-  props: ['task'],
+  name: 'ItemTarea',
+  props: {
+    task: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
-    updateTask() {
-      axios.put(`http://localhost:3000/tasks/${this.task.id}`, {
-        titulo: this.task.titulo,
-        descripcion: this.task.descripcion,
-        estado: this.task.estado,
-      })
-        .then(() => {
-          this.$emit('task-updated');
-        })
-        .catch(error => {
-          console.error('Error updating task:', error);
-        });
+    editTask() {
+      this.$emit('task-updated', this.task.id); // Emitir un evento para actualizar la tarea
     },
     deleteTask() {
-      axios.delete(`http://localhost:3000/tasks/${this.task.id}`)
-        .then(() => {
-          this.$emit('task-deleted');
-        })
-        .catch(error => {
-          console.error('Error deleting task:', error);
-        });
-    },
-  },
+      this.$emit('task-deleted', this.task.id); // Emitir un evento para eliminar la tarea
+    }
+  }
 };
 </script>
-
-<style scoped>
-.done {
-  text-decoration: line-through;
-}
-</style>

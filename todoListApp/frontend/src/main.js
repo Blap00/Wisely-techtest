@@ -9,5 +9,6 @@ const app = createApp(App);
 // Usa el router
 app.use(router);
 
+
 // Monta la aplicación
 app.mount('#app');
