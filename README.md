@@ -25,9 +25,8 @@
 - [Deployment](#deployment)
 - [Uso](#usage)
 - [Construcción del proyecto](#built_using)
-- [TO-DO](../TODO.md)
-- [Contribuciones](../CONTRIBUTING.md)
 - [Autores](#authors)
+- [Agradecimientos](#acknowledgement)
 
 ## 🧐 Acerca del Proyecto <a name = "about"></a>
 
