@@ -1,21 +1,28 @@
 <template>
   <div>
     <h2>{{ editMode ? 'Editar Tarea' : 'Crear Tarea' }}</h2>
-    <form @submit.prevent="submitForm" class="task-form">
-      <div class="form-group">
+    <form @submit.prevent="submitForm" class="task-form row">
+      <div class="form-group col-12 col-md-5">
         <label for="titulo">Título:</label>
-        <input type="text" v-model="task.titulo" required />
+        <input type="text" v-model="task.titulo" required class="form-control" />
       </div>
-      <div class="form-group">
+      <div class="form-group col-12 col-md-5">
         <label for="descripcion">Descripción:</label>
-        <input type="text" v-model="task.descripcion" />
+        <input type="text" v-model="task.descripcion" class="form-control" />
       </div>
-      <div class="form-group">
+      <div class="form-group col-12 col-md-2">
         <label for="estado">Estado:</label>
-        <input type="checkbox" v-model="task.estado" />
+        <input type="checkbox" v-model="task.estado" class="form-check-input" />
       </div>
-      <button type="submit">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary mt-2">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
+      </div>
     </form>
+
+    <!-- Mensaje de error de Bootstrap -->
+    <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
+      {{ errorMessage }}
+    </div>
   </div>
 </template>
 
@@ -37,7 +44,8 @@ export default {
         descripcion: '',
         estado: false
       },
-      editMode: false
+      editMode: false,
+      errorMessage: '' // Para almacenar el mensaje de error
     };
   },
   watch: {
@@ -61,8 +69,11 @@ export default {
         }
         this.$emit('task-added');
         this.resetForm();
+        this.errorMessage = ''; // Limpiar el mensaje de error al enviar correctamente
       } catch (error) {
+        console.log(error.request.response)
         console.error('Error submitting form:', error);
+        this.errorMessage = error.response ? error.response.data.error : 'Error submitting form'; // Configurar el mensaje de error
       }
     },
     resetForm() {
@@ -75,62 +86,37 @@ export default {
 
 <style scoped>
 .task-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1rem;
-  box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .task-form .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
 }
 
 .task-form label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 5px;
 }
 
-.task-form input[type="text"],
-.task-form input[type="checkbox"] {
+.task-form input[type="text"] {
   width: 100%;
-  padding: 0.5rem;
+  padding: 8px;
   box-sizing: border-box;
 }
 
+.task-form input[type="checkbox"] {
+  margin-top: 10px;
+}
+
 .task-form button {
-  padding: 0.75rem 1.5rem;
+  padding: 10px 15px;
   background-color: #28a745;
   color: white;
   border: none;
   cursor: pointer;
-  margin-top: 1rem;
 }
 
 .task-form button:hover {
   background-color: #218838;
-}
-
-@media (min-width: 768px) {
-  .task-form {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .task-form .form-group {
-    flex: 1;
-    min-width: calc(50% - 1rem);
-    margin-right: 1rem;
-  }
-
-  .task-form .form-group:last-child {
-    margin-right: 0;
-  }
-
-  .task-form button {
-    align-self: flex-end;
-  }
 }
 </style>

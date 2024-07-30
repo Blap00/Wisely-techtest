@@ -53,7 +53,7 @@ type nul > router/index.js
 <hr>
 <p>Para solucionar el tipico problema de las cors utilizaremos una herramienta de cors para solucionarla y habilitar el uso entre la api y el frontend</p>
 <p>Esta herramienta de cors la instalaremos dentro de backend</p>
-
+<code>npm install cors</code>
 
 <hr>
 <h3>Backend</h3>
@@ -66,8 +66,8 @@ cd backend
 mkdir controllers models routes config
 </code>
 <p>Creamos los archivos necesarios para el proyecto mediante el codigo</p>
-<code>
-type nul > app.js
+
+<code>type nul > app.js
 type nul > config\database.js
 type nul > models\task.js
 type nul > controllers\taskController.js
@@ -79,4 +79,13 @@ type nul > routes\taskRoutes.js
 <h4>No te olvides de ejecutar el servició desde la raiz del proyecto con: </h4>
 <code>node backend/app.js</code>
 <p>Esta ejecutara el servicio de la API desde el puerto 3000, puedes acceder de manera local en <a type="__blank" href="http://localhost:3000">Localhost</a>, siempre y cuando no se modificara antes</p>
+
+<p>Pues ya tenemos lo correspondiente a la API, pero ahora necesitaremos implementar el middleware encargado de entregar los valores nulos, estos estaran presentes tanto en el back como en el front</p>
+<code>npm install express-validator
+mkdir backend/middlewares
+type nul > middlewares\errorHandler.js
+type nul > middlewares\validarTareas.js
+</code>
+<p>En estos valores escribimos lo correspondiente para validar y manejar los errores que tengamos</p>
 <hr>
+

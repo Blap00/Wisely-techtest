@@ -1,55 +1,55 @@
 //Obtenemos la correspondiente Tarea en "Const"
 const Task = require('../models/task');
 "Exportamos la 'getAllTask'"
-exports.getAllTasks = async (req, res) => {
+exports.getAllTasks = async (req, res, next) => {
   try {
-    const tareas = await Task.findAll(); //Encuentra todas las tareas
-    res.json(tareas); //Deja como respuesta 
+    const tareas = await Task.findAll();
+    res.json(tareas);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
 
-exports.createTask = async (req, res) => {
+exports.createTask = async (req, res, next) => {
   try {
-    const { titulo, descripcion } = req.body; //Definimos reglas de la creación
-    const task = await Task.create({ titulo, descripcion }); //Al crear la tarea define el titulo y descripción
-    res.status(201).json(task); //Entrega tarea con codigo 201 
+    const { titulo, descripcion } = req.body;
+    const task = await Task.create({ titulo, descripcion });
+    res.status(201).json(task);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
 
-exports.updateTask = async (req, res) => {
+exports.updateTask = async (req, res, next) => {
   try {
-    const { id } = req.params; //Segun la ID seleccionada desde parametros
-    const { titulo, descripcion, estado } = req.body; //Obtiene los datos de Titulo, descripcion y estado correspondiente
-    const task = await Task.findByPk(id); //Encuentra el obj de Task por la Id de parametros
-    if (task) { //Si el OBJ existe, entonces
-      task.titulo = titulo; //Define titulo
-      task.descripcion = descripcion; //Define descripcion
-      task.estado = estado; //Define Estado
-      await task.save(); // Espera y realiza el guardado de la tarea
-      res.json(task); // Entrega respuesta
+    const { id } = req.params;
+    const { titulo, descripcion, estado } = req.body;
+    const task = await Task.findByPk(id);
+    if (task) {
+      task.titulo = titulo;
+      task.descripcion = descripcion;
+      task.estado = estado;
+      await task.save();
+      res.json(task);
     } else {
-      res.status(404).json({ error: 'Task not found' }); //Entrega error 404 sobre el error
+      res.status(404).json({ error: 'Task not found' });
     }
   } catch (err) {
-    res.status(500).json({ error: err.message }); //Entrega error 500 + mensaje
+    next(err);
   }
 };
 
-exports.deleteTask = async (req, res) => {
+exports.deleteTask = async (req, res, next) => {
   try {
-    const { id } = req.params; //Obtiene id de parametros
-    const task = await Task.findByPk(id); //Encuentra task por Id
-    if (task) { //Si existe
-      await task.destroy(); // Destruye la tarea (Elimina)
-      res.status(204).end(); // Entrega codigo de finalización
+    const { id } = req.params;
+    const task = await Task.findByPk(id);
+    if (task) {
+      await task.destroy();
+      res.status(204).end();
     } else {
-      res.status(404).json({ error: 'Task not found' }); // Entrega codigo de error
+      res.status(404).json({ error: 'Task not found' });
     }
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
