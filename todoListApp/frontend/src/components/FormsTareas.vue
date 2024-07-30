@@ -1,28 +1,27 @@
 <template>
+  
   <div>
+    <div v-if="errors.length" class="alert alert-danger mt-3">
+      <ul>
+        <li v-for="error in errors" :key="error.msg">{{ error.msg }}</li>
+      </ul>
+    </div>
     <h2>{{ editMode ? 'Editar Tarea' : 'Crear Tarea' }}</h2>
     <form @submit.prevent="submitForm" class="task-form row">
-      <div class="form-group col-12 col-md-5">
+      <div class="form-group col-5">
         <label for="titulo">Título:</label>
-        <input type="text" v-model="task.titulo" required class="form-control" />
+        <input type="text" v-model="task.titulo" required />
       </div>
-      <div class="form-group col-12 col-md-5">
+      <div class="form-group col-5">
         <label for="descripcion">Descripción:</label>
-        <input type="text" v-model="task.descripcion" class="form-control" />
+        <input type="text" v-model="task.descripcion" />
       </div>
-      <div class="form-group col-12 col-md-2">
+      <div class="form-group col-1">
         <label for="estado">Estado:</label>
-        <input type="checkbox" v-model="task.estado" class="form-check-input" />
+        <input type="checkbox" v-model="task.estado" />
       </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary mt-2">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
-      </div>
+      <button type="submit">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
     </form>
-
-    <!-- Mensaje de error de Bootstrap -->
-    <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
-      {{ errorMessage }}
-    </div>
   </div>
 </template>
 
@@ -45,7 +44,7 @@ export default {
         estado: false
       },
       editMode: false,
-      errorMessage: '' // Para almacenar el mensaje de error
+      errors: [] // Estado para almacenar errores
     };
   },
   watch: {
@@ -69,16 +68,18 @@ export default {
         }
         this.$emit('task-added');
         this.resetForm();
-        this.errorMessage = ''; // Limpiar el mensaje de error al enviar correctamente
       } catch (error) {
-        console.log(error.request.response)
-        console.error('Error submitting form:', error);
-        this.errorMessage = error.response ? error.response.data.error : 'Error submitting form'; // Configurar el mensaje de error
+        if (error.response && error.response.data && error.response.data.errors) {
+          this.errors = error.response.data.errors; // Almacena los errores
+        } else {
+          console.error('Error submitting form:', error);
+        }
       }
     },
     resetForm() {
       this.task = { id: null, titulo: '', descripcion: '', estado: false };
       this.editMode = false;
+      this.errors = []; // Limpia los errores
     }
   }
 };
@@ -86,7 +87,13 @@ export default {
 
 <style scoped>
 .task-form {
-  margin-top: 20px;
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  padding-left: 23%;
 }
 
 .task-form .form-group {
@@ -118,5 +125,9 @@ export default {
 
 .task-form button:hover {
   background-color: #218838;
+}
+
+.alert {
+  margin-top: 20px;
 }
 </style>
