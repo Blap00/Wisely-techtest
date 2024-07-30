@@ -9,7 +9,7 @@ router.get('/tasks', taskController.getAllTasks);
 router.post('/tasks', validateTask, taskController.createTask);
 router.put('/tasks/:id', validateTask, taskController.updateTask);
 router.delete('/tasks/:id', taskController.deleteTask);
-
+router.get('/tasks/:id', taskController.getById);
 // Usar el middleware de manejo de errores
 router.use(errorHandler);
 

@@ -125,49 +125,95 @@ Una vez completados los pasos anteriores, deberías poder acceder a la aplicaci�
 ¡Ya estás listo para comenzar a desarrollar y probar el proyecto!
 
 
-## 🔧 Running the tests <a name = "tests"></a>
+## 🔧 Ejecutando los TEST <a name = "tests"></a>
 
-Explain how to run the automated tests for this system.
+El sistema ya contiene un archivo para probar el sistema, este se ejecuta desde el backend con npm test, el cual entrega valores de la ejecución, con pruebas y los errores ya documentados en el archivo bajo la ruta re test/task.test.js
 
-### Break down into end to end tests
+### Ejecutamos los test de End to End 
 
-Explain what these tests test and why
+Los test se ejecutan antes de ejecutar el programa back principal, pues estos verifican la integridad de la aplicación con sus solicitudes para realizar los CRUD, 
 
+entregando un resultado de
+```bash
+> backend@1.0.0 test
+> mocha
+
+Executing (default): SELECT name FROM sqlite_master WHERE type='table' AND name='Tasks';
+
+
+Executing (default): PRAGMA INDEX_LIST(`Tasks`)
+Executing (default): SELECT `id`, `titulo`, `descripcion`, `estado`, `createdAt`, `updatedAt` FROM `Tasks` AS `Task`;
+Server is running on port 3000
+  ✔ Debe obtener las tareas como JSON
+Executing (default): INSERT INTO `Tasks` (`id`,`titulo`,`descripcion`,`estado`,`createdAt`,`updatedAt`) VALUES (NULL,$1,$2,$3,$4,$5);
+  ✔ Debe crear una nueva tarea
+Executing (default): SELECT `id`, `titulo`, `descripcion`, `estado`, `createdAt`, `updatedAt` FROM `Tasks` AS `Task` WHERE `Task`.`id` = '18';
+Tarea obtenida: {
+  id: 18,
+  titulo: 'New Task',
+  descripcion: 'Task description',
+  estado: false,
+  createdAt: '2024-07-30T21:22:06.291Z',
+  updatedAt: '2024-07-30T21:22:06.291Z'
+}
+  ✔ Debe obtener una tarea por ID
+Executing (default): SELECT `id`, `titulo`, `descripcion`, `estado`, `createdAt`, `updatedAt` FROM `Tasks` AS `Task` WHERE `Task`.`id` = '18';
+Executing (default): UPDATE `Tasks` SET `titulo`=$1,`descripcion`=$2,`estado`=$3,`updatedAt`=$4 WHERE `id` = $5
+  ✔ Debe actualizar una tarea existente
+Executing (default): SELECT `id`, `titulo`, `descripcion`, `estado`, `createdAt`, `updatedAt` FROM `Tasks` AS `Task` WHERE `Task`.`id` = '18';
+Executing (default): DELETE FROM `Tasks` WHERE `id` = 18
+Executing (default): SELECT `id`, `titulo`, `descripcion`, `estado`, `createdAt`, `updatedAt` FROM `Tasks` AS `Task` WHERE `Task`.`id` = '18';
+  1) Debería eliminar una tarea
+
+  4 passing (120ms)
+  1 failing
+
+  1) Debería eliminar una tarea:
+     Error: Error: expected 404 "Not Found", got 200 "OK"
+      at C:\Users\56941\Dropbox\PC\Documents\GitHub\WiselyTechTest\todoListApp\backend\test\task.test.js:91:19
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async Context.<anonymous> (test\task.test.js:87:5)
 ```
-Give an example
-```
 
-### And coding style tests
+## 🎈 Uso del sistema <a name="usage"></a>
 
-Explain what these tests test and why
+Para usar el sistema, sigue estos pasos:
 
-```
-Give an example
-```
+1. **Clona el Repositorio**:
+   ```bash
+   git clone https://github.com/Blap00/Wisely-techtest
+    ```
+2. Instala las Dependencias:
+    Navega al directorio del proyecto y ejecuta:
+    ```bash
+    npm install
+    ```
+3. Ejecuta pruebas de sistemas:
+    ```bash
+    npm test
+    ```
+4. Inicia los servidores:
+    - Navega al directorio del proyecto en backend y ejecuta:
+    ```bash
+    npm run start
+    ```
+    - En el directorio del Frontend ejecuta
+    ```bash
+    npm run serve
+    ```
 
-## 🎈 Usage <a name="usage"></a>
+## ⛏️ Build fue realizada gracias a <a name = "built_using"></a>
 
-Add notes about how to use the system.
 
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
 - [VueJs](https://vuejs.org/) - Web Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 
-## ✍️ Authors <a name = "authors"></a>
+## ✍️ Autores <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@Blap00](https://github.com/Blap00) - Desarrollador del sistema
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+## 🎉 Agradecimientos <a name = "acknowledgement"></a>
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- Gracias a videos en YT de [@Midudev](https://www.youtube.com/@midudev)
+- Proyecto inicial gracias a [Wisely](https://wisely.cl/)
