@@ -55,6 +55,11 @@ type nul > router/index.js
 <p>Esta herramienta de cors la instalaremos dentro de backend</p>
 <code>npm install cors</code>
 
+<br>
+<p> Para ejecutar lo que seria el frontend utilizamos 
+<code>npm run serve</code>
+</p>
+
 <hr>
 <h3>Backend</h3>
 <p>Instalamos la herramientas necesarias</p>
