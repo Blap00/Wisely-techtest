@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Lista de Tareas</h1>
-    <table>
+    <table class="tasks-table">
       <thead>
         <tr>
           <th>ID</th>
@@ -16,10 +16,10 @@
           <td>{{ task.id }}</td>
           <td>{{ task.titulo }}</td>
           <td>{{ task.descripcion }}</td>
-          <td>{{ task.estado ? 'Completed' : 'Pending' }}</td>
+          <td>{{ task.estado ? 'Completado' : 'Pendiente' }}</td>
           <td>
-            <button @click="editTask(task.id)">Editar</button>
-            <button @click="deleteTask(task.id)">Eliminar</button>
+            <button @click="$emit('edit-task', task)">Editar</button>
+            <button @click="$emit('delete-task', task.id)">Eliminar</button>
           </td>
         </tr>
       </tbody>
@@ -28,69 +28,41 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-
 export default {
-  components: {
-
-  },
-  data() {
-    return {
-      tasks: [],
-    };
-  },
-  methods: {
-    fetchTasks() {
-      axios.get('http://localhost:3000/tasks')
-        .then(response => {
-          this.tasks = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching tasks:', error);
-        });
-    },
-    editTask(id) {
-      // Lógica para editar la tarea, podría abrir un modal con un formulario para editar
-      console.log('Edit task with ID:', id);
-    },
-    deleteTask(id) {
-      axios.delete(`http://localhost:3000/tasks/${id}`)
-        .then(() => {
-          this.fetchTasks(); // Refresca la lista después de eliminar
-        })
-        .catch(error => {
-          console.error('Error deleting task:', error);
-        });
-    }
-  },
-  created() {
-    this.fetchTasks();
+  props: {
+    tasks: Array
   }
 };
 </script>
 
 <style scoped>
-table {
+.tasks-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
-th, td {
+.tasks-table th,
+.tasks-table td {
   border: 1px solid #ddd;
   padding: 8px;
-}
-
-th {
-  background-color: #f2f2f2;
   text-align: left;
 }
 
-tr:nth-child(even) {
+.tasks-table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.tasks-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-button {
+.tasks-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.tasks-table button {
   margin-right: 5px;
 }
 </style>

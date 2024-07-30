@@ -1,10 +1,20 @@
 <template>
   <div>
-    <h2>Crea una nueva tarea</h2>
-    <form @submit.prevent="submitTask">
-      <input v-model="titulo" placeholder="Titulo" required />
-      <input v-model="descripcion" placeholder="Descripcion" />
-      <button type="submit">Add Task</button>
+    <h2>{{ editMode ? 'Editar Tarea' : 'Crear Tarea' }}</h2>
+    <form @submit.prevent="submitForm" class="task-form row">
+      <div class="form-group col-5">
+        <label for="titulo">Título:</label>
+        <input type="text" v-model="task.titulo" required />
+      </div>
+      <div class="form-group col-5">
+        <label for="descripcion">Descripción:</label>
+        <input type="text" v-model="task.descripcion" />
+      </div>
+      <div class="form-group col-1">
+        <label for="estado">Estado:</label>
+        <input type="checkbox" v-model="task.estado" />
+      </div>
+      <button type="submit">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
     </form>
   </div>
 </template>
@@ -13,27 +23,98 @@
 import axios from 'axios';
 
 export default {
+  props: {
+    taskToEdit: {
+      type: Object,
+      default: () => null
+    }
+  },
   data() {
     return {
-      titulo: '',
-      descripcion: '',
+      task: {
+        id: null,
+        titulo: '',
+        descripcion: '',
+        estado: false
+      },
+      editMode: false
     };
   },
-  methods: {
-    submitTask() {
-      axios.post('http://localhost:3000/tasks', {
-        titulo: this.titulo,
-        descripcion: this.descripcion,
-      })
-        .then(() => {
-          this.titulo = '';
-          this.descripcion = '';
-          this.$emit('task-added');
-        })
-        .catch(error => {
-          console.error('Error adding task:', error);
-        });
-    },
+  watch: {
+    taskToEdit: {
+      immediate: true,
+      handler(newTask) {
+        if (newTask) {
+          this.task = { ...newTask };
+          this.editMode = true;
+        }
+      }
+    }
   },
+  methods: {
+    async submitForm() {
+      try {
+        if (this.editMode) {
+          await axios.put(`http://localhost:3000/tasks/${this.task.id}`, this.task);
+        } else {
+          await axios.post('http://localhost:3000/tasks', this.task);
+        }
+        this.$emit('task-added');
+        this.resetForm();
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+    },
+    resetForm() {
+      this.task = { id: null, titulo: '', descripcion: '', estado: false };
+      this.editMode = false;
+    }
+  }
 };
 </script>
+
+<style scoped>
+.task-form{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    padding-left: 23%;
+}
+.task-form {
+  margin-top: 20px;
+}
+
+.task-form .form-group {
+  margin-bottom: 15px;
+}
+
+.task-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.task-form input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.task-form input[type="checkbox"] {
+  margin-top: 10px;
+}
+
+.task-form button {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.task-form button:hover {
+  background-color: #218838;
+}
+</style>
