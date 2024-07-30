@@ -23,6 +23,7 @@ exports.createTask = async (req, res) => {
 exports.updateTask = async (req, res) => {
   try {
     const { id } = req.params; //Segun la ID seleccionada desde parametros
+    console.log(id)
     const { titulo, descripcion, estado } = req.body; //Obtiene los datos de Titulo, descripcion y estado correspondiente
     const task = await Task.findByPk(id); //Encuentra el obj de Task por la Id de parametros
     if (task) { //Si el OBJ existe, entonces

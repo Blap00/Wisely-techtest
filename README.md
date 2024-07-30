@@ -32,6 +32,10 @@ mkdir router
 <hr>
 <p>Crearemos los distintos archivos correspondientes, podemos realizarlo de la manera tradicional o con codigos</p>
 <code>
+type nul > components/customNavBar.vue
+</code>
+
+<code>
 type nul > components/ListaTareas.vue
 type nul > components/FormsTareas.vue
 type nul > components/ItemTarea.vue
