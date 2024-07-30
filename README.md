@@ -1,96 +1,173 @@
-# WiselyTechTest
- 
-Iniciamos el proyecto creando una carpeta llamada "todoListApp"
-
-----
-<code>mkdir todoListApp</code>
-----
-<hr>
-----
-Iniciamos la estructura para nuestro proyecto segun solicita el PDF
-----
-<h3>Frontend</h3>
-<br>
-<p>Instalamos la herramienta de Vue/Cli</p>
-<code>npm install -g @vue/cli</code>
-<br>
-----
-<p>Creamos lo correspondiente a FrontEnd</p>
-<code>vue create frontend</code>
-<br>
-----
-<p>Instalamos la dependencia con Axios necesaria</p>
-<code>npm install axios</code>
-<br>
------
-<p>Dentro de frontend/src ejecutaremos comandos para la creacion de views y routes</p>
-<code>
-mkdir views
-mkdir router
-</code>
-<p>Asi, lograremos crear los correspondiente archivos '.vue' y la ejecución de estos, en views guardaremos las vistas al usuario, tal como 'homeView' o 'aboutView' <br /> en components tendremos los componentes principales, que sera respecto a la Listas, al formulario de creación y por item individual. <br />Dentro de routes tendremos el correspondiente al index.vue, el cual tendra las rutas del mismo </p>
-<hr>
-<p>Crearemos los distintos archivos correspondientes, podemos realizarlo de la manera tradicional o con codigos</p>
-<code>
-type nul > components/customNavBar.vue
-</code>
-
-<code>
-type nul > components/ListaTareas.vue
-type nul > components/FormsTareas.vue
-type nul > components/ItemTarea.vue
-</code>
-
-<code>
-type nul > views/HomeView.vue
-type nul > views/AboutView.vue
-</code>
-
-<code>
-type nul > router/index.js
-</code>
-
-<hr>
-<p>Para solucionar el tipico problema de las cors utilizaremos una herramienta de cors para solucionarla y habilitar el uso entre la api y el frontend</p>
-<p>Esta herramienta de cors la instalaremos dentro de backend</p>
-<code>npm install cors</code>
-
-<br>
-<p> Para ejecutar lo que seria el frontend utilizamos 
-<code>npm run serve</code>
+<p align="center">
+  <a href="" rel="noopener">
+ <img src="https://wisely.cl/wp-content/uploads/2024/04/Logo-wisely-illutrator_Mesa-de-trabajo-1-14-e1712084915797.png" alt="Logo" width="260" height="120" class="d-inline-block align-text-top">
 </p>
 
-<hr>
-<h3>Backend</h3>
-<p>Instalamos la herramientas necesarias</p>
-<code>npm install express sequelize pg pg-hstore dotenv</code>
-<p>Luego configuramos tanto las distintas carpetas del proyecto</p>
-<code>mkdir backend</code>
-<code>
-cd backend
-mkdir controllers models routes config
-</code>
-<p>Creamos los archivos necesarios para el proyecto mediante el codigo</p>
+<h3 align="center">To-do List APP</h3>
 
-<code>type nul > app.js
-type nul > config\database.js
-type nul > models\task.js
-type nul > controllers\taskController.js
-type nul > routes\taskRoutes.js
-</code>
-<p>Tambien configuraremos lo correspondiente a la config de Database</p>
-<p>Luego de configurar la base de datos, configuramos el controlador, los modelosy las rutas</p>
+<div align="center">
 
-<h4>No te olvides de ejecutar el servició desde la raiz del proyecto con: </h4>
-<code>node backend/app.js</code>
-<p>Esta ejecutara el servicio de la API desde el puerto 3000, puedes acceder de manera local en <a type="__blank" href="http://localhost:3000">Localhost</a>, siempre y cuando no se modificara antes</p>
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-<p>Pues ya tenemos lo correspondiente a la API, pero ahora necesitaremos implementar el middleware encargado de entregar los valores nulos, estos estaran presentes tanto en el back como en el front</p>
-<code>npm install express-validator
-mkdir backend/middlewares
-type nul > middlewares\errorHandler.js
-type nul > middlewares\validarTareas.js
-</code>
-<p>En estos valores escribimos lo correspondiente para validar y manejar los errores que tengamos</p>
-<hr>
+</div>
 
+---
+
+<p align="center"> El proyecto abarca el examén técnico sobre un TO-DO LIST, esto basado en tecnologias como Node.js y Vue.js, el cual nos permite utilizar un CRUD para nuestro proyecto.
+    <br> 
+</p>
+
+## 📝 Table of Contents
+
+- [Acerca del Proyecto](#about)
+- [Iniciando](#getting_started)
+- [Deployment](#deployment)
+- [Uso](#usage)
+- [Construcción del proyecto](#built_using)
+- [TO-DO](../TODO.md)
+- [Contribuciones](../CONTRIBUTING.md)
+- [Autores](#authors)
+
+## 🧐 Acerca del Proyecto <a name = "about"></a>
+
+Este proyecto, WiselyTechTest, tiene como objetivo proporcionar una aplicación de lista de tareas simple y efectiva que permita a los usuarios gestionar sus actividades diarias de manera organizada. Desarrollado con un enfoque en la simplicidad y la funcionalidad, esta aplicación utiliza Vue.js para el frontend, ofreciendo una interfaz de usuario interactiva y fácil de usar, y Node.js con Express para el backend, asegurando un manejo robusto y eficiente de los datos.
+
+La aplicación permite a los usuarios crear, actualizar y eliminar tareas, además de marcar aquellas que ya han sido completadas. Con un diseño responsivo y una arquitectura de API RESTful, TodoListApp está construido para adaptarse a diversas necesidades, desde el uso personal hasta la integración en entornos de trabajo colaborativo. Esta combinación de tecnologías modernas y buenas prácticas de desarrollo garantiza una experiencia fluida y confiable para el usuario final.
+
+## 🏁 Primeros Pasos <a name = "getting_started"></a>
+
+Estas instrucciones te permitirán obtener una copia del proyecto y ejecutarlo en tu máquina local para propósitos de desarrollo y pruebas. Consulta la sección de [despliegue](#deployment) para obtener notas sobre cómo desplegar el proyecto en un sistema en vivo.
+
+### Prerrequisitos
+
+Asegúrate de tener instaladas las siguientes herramientas:
+
+- [Node.js](https://nodejs.org/) (versión 20 o superior)
+- [npm](https://www.npmjs.com/) (versión 10.5 o superior)
+- [Vue CLI](https://cli.vuejs.org/) (instalado globalmente en versión 5.0 o superior)
+- [SQLITE](https://www.sqlitetutorial.net/sqlite-nodejs/connect/) para la base de datos
+
+### Instalación
+
+Sigue estos pasos para configurar el proyecto en tu entorno local:
+
+1. Clona el repositorio:
+
+    ```bash
+    git clone https://github.com/Blap00/todoListApp.git
+    cd todoListApp
+    ```
+
+2. Configura el Backend:
+
+    1. Navega al directorio `backend`:
+
+        ```bash
+        cd backend
+        ```
+
+    2. Instala las dependencias necesarias:
+
+        ```bash
+        npm install
+        ```
+
+    3. Configura la base de datos SQLITE:
+
+        - Configura la base de datos SQLITE segun el requerimiento.
+
+    4. Ejecuta las migraciones para crear las tablas necesarias:
+
+        ```bash
+        npx sequelize-cli db:migrate
+        ```
+
+    5. Inicia el servidor:
+
+        ```bash
+        npm run start
+        ```
+
+3. Configura el Frontend:
+
+    1. Navega al directorio `frontend`:
+
+        ```bash
+        cd ../frontend
+        ```
+
+    2. Instala las dependencias necesarias:
+
+        ```bash
+        npm install
+        ```
+
+    3. Inicia el servidor de desarrollo:
+
+        ```bash
+        npm run serve
+        ```
+
+### Estructura del Proyecto
+
+El proyecto está dividido en dos partes principales:
+
+- **Backend**: Ubicado en el directorio `backend`, manejado por Express.js y Sequelize.
+- **Frontend**: Ubicado en el directorio `frontend`, construido con Vue.js y Axios para manejar las solicitudes HTTP.
+
+### Ejecución
+
+Una vez completados los pasos anteriores, deberías poder acceder a la aplicación en tu navegador en la dirección `http://localhost:8080` para el frontend y `http://localhost:3000` para la API del backend.
+
+¡Ya estás listo para comenzar a desarrollar y probar el proyecto!
+
+
+## 🔧 Running the tests <a name = "tests"></a>
+
+Explain how to run the automated tests for this system.
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## 🎈 Usage <a name="usage"></a>
+
+Add notes about how to use the system.
+
+## 🚀 Deployment <a name = "deployment"></a>
+
+Add additional notes about how to deploy this on a live system.
+
+## ⛏️ Built Using <a name = "built_using"></a>
+
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Express](https://expressjs.com/) - Server Framework
+- [VueJs](https://vuejs.org/) - Web Framework
+- [NodeJs](https://nodejs.org/en/) - Server Environment
+
+## ✍️ Authors <a name = "authors"></a>
+
+- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+
+See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+- Hat tip to anyone whose code was used
+- Inspiration
+- References
