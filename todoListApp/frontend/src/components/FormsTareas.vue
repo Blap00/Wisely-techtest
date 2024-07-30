@@ -1,16 +1,16 @@
 <template>
   <div>
     <h2>{{ editMode ? 'Editar Tarea' : 'Crear Tarea' }}</h2>
-    <form @submit.prevent="submitForm" class="task-form row">
-      <div class="form-group col-5">
+    <form @submit.prevent="submitForm" class="task-form">
+      <div class="form-group">
         <label for="titulo">Título:</label>
         <input type="text" v-model="task.titulo" required />
       </div>
-      <div class="form-group col-5">
+      <div class="form-group">
         <label for="descripcion">Descripción:</label>
         <input type="text" v-model="task.descripcion" />
       </div>
-      <div class="form-group col-1">
+      <div class="form-group">
         <label for="estado">Estado:</label>
         <input type="checkbox" v-model="task.estado" />
       </div>
@@ -74,47 +74,63 @@ export default {
 </script>
 
 <style scoped>
-.task-form{
-    width: 80vw;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    padding-left: 23%;
-}
 .task-form {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .task-form .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .task-form label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }
 
-.task-form input[type="text"] {
+.task-form input[type="text"],
+.task-form input[type="checkbox"] {
   width: 100%;
-  padding: 8px;
+  padding: 0.5rem;
   box-sizing: border-box;
 }
 
-.task-form input[type="checkbox"] {
-  margin-top: 10px;
-}
-
 .task-form button {
-  padding: 10px 15px;
+  padding: 0.75rem 1.5rem;
   background-color: #28a745;
   color: white;
   border: none;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .task-form button:hover {
   background-color: #218838;
+}
+
+@media (min-width: 768px) {
+  .task-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .task-form .form-group {
+    flex: 1;
+    min-width: calc(50% - 1rem);
+    margin-right: 1rem;
+  }
+
+  .task-form .form-group:last-child {
+    margin-right: 0;
+  }
+
+  .task-form button {
+    align-self: flex-end;
+  }
 }
 </style>

@@ -1,21 +1,25 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a style="width: 25vw;" class="navbar-brand" href="#"><img width="41%" src="https://wisely.cl/wp-content/uploads/2024/04/Logo-wisely-illutrator_Mesa-de-trabajo-1-14-e1712084915797.png"></a>
-    <a class="navbar-brand" href="#">To-Do List</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="https://wisely.cl/wp-content/uploads/2024/04/Logo-wisely-illutrator_Mesa-de-trabajo-1-14-e1712084915797.png" alt="Logo" width="120" height="40" class="d-inline-block align-text-top">
+      To-do List
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <router-link class="nav-link" to="/">Inicio</router-link>
+          <a class="nav-link active" aria-current="page" href="#">To-do List</a>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/about">Sobre mi</router-link>
+          <a class="nav-link" href="#">Features</a>
         </li>
       </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 </template>
 
 <script>
@@ -25,7 +29,12 @@ export default {
 </script>
 
 <style scoped>
+.navbar-brand{
+  display:flex;
+  align-items: center;
+}
 .navbar {
+  margin-top: -9vh;
   margin-bottom: 20px;
 }
 </style>
